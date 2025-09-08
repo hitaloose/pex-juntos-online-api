@@ -5,6 +5,7 @@
   "scripts": {
     "prebuild": "npm install",
     "build": "tsc",
+    "postbuild": "tsx src/utils/umzug.ts up",
     "dev": "tsx --watch src/main.ts",
     "start": "node dist/main.js"
   },
