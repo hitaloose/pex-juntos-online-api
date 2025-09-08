@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {
+    "prebuild": "npm install",
     "build": "tsc",
     "dev": "tsx --watch src/main.ts",
     "start": "node dist/main.js"
