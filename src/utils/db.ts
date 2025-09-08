@@ -4,6 +4,11 @@ import { CONFIG } from "../config";
 export const db = new Sequelize({
   dialect: CONFIG.DB_DIALECT,
   storage: CONFIG.DB_STORAGE,
+  database: CONFIG.DB_NAME,
+  username: CONFIG.DB_USERNAME,
+  password: CONFIG.DB_PASSWORD,
+  host: CONFIG.DB_HOST,
+  port: CONFIG.DB_PORT,
 });
 
 export async function assertDatabaseConnectionOk() {

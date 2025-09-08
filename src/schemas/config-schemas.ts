@@ -9,6 +9,11 @@ export const configSchema = z.object({
 
   DB_DIALECT: z.enum(DbDialect),
   DB_STORAGE: z.string().optional().default(""),
+  DB_NAME: z.string(),
+  DB_USERNAME: z.string(),
+  DB_PASSWORD: z.string(),
+  DB_HOST: z.string(),
+  DB_PORT: z.coerce.number(),
 
   BCRYPT_SALTS: z.coerce.number().optional().default(10),
 
