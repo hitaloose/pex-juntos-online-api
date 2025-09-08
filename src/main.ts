@@ -5,6 +5,6 @@ import { models } from "./utils/models";
 
 setupDb(models);
 
-api.listen(CONFIG.API_PORT, () => {
-  console.log(`server running on ${CONFIG.API_PORT}`);
+api.listen(CONFIG.PORT, () => {
+  console.log(`server running on ${CONFIG.PORT}`);
 });
