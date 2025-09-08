@@ -1,0 +1,435 @@
+type: collection.insomnia.rest/5.0
+name: juntos-online-pex
+meta:
+  id: wrk_f5f9548a358745d4a517489630c8a212
+  created: 1756929704897
+  modified: 1756929704897
+  description: ""
+collection:
+  - name: auth
+    meta:
+      id: fld_8b647673fbda45ab93bea99525fc899c
+      created: 1756929711615
+      modified: 1756929711615
+      sortKey: -1756929711615
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/auth/signup"
+        name: signup
+        meta:
+          id: req_18315d3010cd43efa151642b8f1468fc
+          created: 1756929714501
+          modified: 1756998248560
+          isPrivate: false
+          description: ""
+          sortKey: -1756929714501
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Hitalos Loose",
+            	"email": "hitaloose@gmail.com",
+            	"password": "123123",
+            	"passwordConfirmation": "123123",
+            	"phoneWhatsapp": "33997000965",
+            	"neighborhood": "Sagrada Familia"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.5.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/auth/login"
+        name: login
+        meta:
+          id: req_0755a87041224f398a7c6e37ba3731b4
+          created: 1756935688204
+          modified: 1756998269834
+          isPrivate: false
+          description: ""
+          sortKey: -1756921444020.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "hitaloose@gmail.com",
+            	"password": "123123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.5.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/auth/me"
+        name: me
+        meta:
+          id: req_52990facca664e049d8eeaf8b45430a6
+          created: 1756936541520
+          modified: 1756992258328
+          isPrivate: false
+          description: ""
+          sortKey: -1756917308780.25
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+          disabled: false
+          prefix: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: category
+    meta:
+      id: fld_2a2b004a86d84bcc9e90232b5e4efb63
+      created: 1756992267917
+      modified: 1756992275301
+      sortKey: -1756992267918
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/category"
+        name: get all
+        meta:
+          id: req_c3366f5fb86048ed8d2f162ab1c8936a
+          created: 1756992276216
+          modified: 1756992319540
+          isPrivate: false
+          description: ""
+          sortKey: -1756992276216
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: ad
+    meta:
+      id: fld_0ea8c6182b74497a8897a378f60d927e
+      created: 1756992304119
+      modified: 1756992315228
+      sortKey: -1756960989766.5
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad"
+        name: search
+        meta:
+          id: req_b5a7d05b61b54fa9b1074eb88ad6b31f
+          created: 1756992342240
+          modified: 1756992957820
+          isPrivate: false
+          description: ""
+          sortKey: -1756992342240
+        method: GET
+        parameters:
+          - id: pair_f8f1cea1e2b94beba6bdcb477be888af
+            name: page
+            value: "1"
+            description: ""
+            disabled: false
+          - id: pair_7c123b76005d4f56b0fcbd04c238d178
+            name: q
+            value: ""
+            description: ""
+            disabled: true
+          - id: pair_d9effd8f20d14b429bfb79f6bbb68a6a
+            name: perPage
+            value: ""
+            description: ""
+            disabled: true
+          - id: pair_c6aee29bd0354786ab1447b726f58fed
+            name: category
+            value: ""
+            description: ""
+            disabled: true
+          - id: pair_57a3f1afca74421ba94f40192a277cf4
+            name: neighborhood
+            value: ""
+            description: ""
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad/:id"
+        name: get
+        meta:
+          id: req_e3d464339b8d4c47979e9e01867aabc8
+          created: 1756992473199
+          modified: 1756992487235
+          isPrivate: false
+          description: ""
+          sortKey: -1756992309228
+        method: GET
+        parameters:
+          - id: pair_3f0801d77ee544aba5cfd00703eab22d
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: "1"
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad"
+        name: create
+        meta:
+          id: req_d53c2df4f4714ef59b92d9265c58d240
+          created: 1756992498046
+          modified: 1757011884477
+          isPrivate: false
+          description: ""
+          sortKey: -1756992292722
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Instalo torneira eletrica",
+            	"description": "Instalação limpa e com qualidade",
+            	"category": "servicos-gerais"
+            }
+        parameters:
+          - id: pair_3f0801d77ee544aba5cfd00703eab22d
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.5.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad/:id/toggle-status"
+        name: toggle status
+        meta:
+          id: req_15e06d1b0918474c9cdc7e7362b34117
+          created: 1756998402583
+          modified: 1757007606104
+          isPrivate: false
+          description: ""
+          sortKey: -1756992281374.125
+        method: PATCH
+        parameters:
+          - id: pair_3f0801d77ee544aba5cfd00703eab22d
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: "1"
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad/:id/toggle-hide"
+        name: toggle hide
+        meta:
+          id: req_59aa6077e5bb4f0ebd1e49eeb8b3f00b
+          created: 1757007582688
+          modified: 1757007584900
+          isPrivate: false
+          description: ""
+          sortKey: -1756992280342.5
+        method: PATCH
+        parameters:
+          - id: pair_3f0801d77ee544aba5cfd00703eab22d
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: "1"
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad/:id"
+        name: delete
+        meta:
+          id: req_d6ee98ce64ac4301be2b6681dac6d4b1
+          created: 1757007601210
+          modified: 1757007612325
+          isPrivate: false
+          description: ""
+          sortKey: -1756992282405.75
+        method: DELETE
+        parameters:
+          - id: pair_3f0801d77ee544aba5cfd00703eab22d
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: "1"
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/ad/"
+        name: get all
+        meta:
+          id: req_c503a1aa99ed4e13a034a76e852940db
+          created: 1757329550652
+          modified: 1757329571836
+          isPrivate: false
+          description: ""
+          sortKey: -1756992300975
+        method: GET
+        parameters:
+          - id: pair_3f0801d77ee544aba5cfd00703eab22d
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: neighborhood
+    meta:
+      id: fld_e7d342f787ed4705840132070f868fb9
+      created: 1757329603471
+      modified: 1757329603471
+      sortKey: -1757329603471
+      description: ""
+    children:
+      - url: "{{ _.BASE_URL }}/{{ _.URL_PREFIX }}/neighborhood"
+        name: get all
+        meta:
+          id: req_5ed8098579d94593963c77dda4471b45
+          created: 1757329617499
+          modified: 1757329633989
+          isPrivate: false
+          description: ""
+          sortKey: -1757329617499
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.5.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_cc97bca39566af55f4606a8d130ab800410f4fd0
+    created: 1756929704898
+    modified: 1756929704898
+environments:
+  name: Base Environment
+  meta:
+    id: env_cc97bca39566af55f4606a8d130ab800410f4fd0
+    created: 1756929704897
+    modified: 1757015327030
+    isPrivate: false
+  data:
+    BASE_URL: http://localhost:3333
+    URL_PREFIX: api/v1
+    TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzU3MDE1MzE4LCJleHAiOjE4MDAyMTUzMTh9.xrL8QJ1oCPxCymOriY4JUbrcKHGQKw_SsdFs4EwZndA
