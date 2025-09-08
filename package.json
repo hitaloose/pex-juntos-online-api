@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "dist/main.js",
   "scripts": {
-    "dev": "tsx --watch src/main.ts"
+    "build": "tsc",
+    "dev": "tsx --watch src/main.ts",
+    "start": "node dist/main.js"
   },
   "author": "Hitalo Loose (hitaloose@gmail.com)",
   "license": "MIT",
