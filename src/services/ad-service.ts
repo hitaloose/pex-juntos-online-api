@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { Op, Transaction } from "sequelize";
 
 import { Ad } from "../models/ad";
 import { escapeLike } from "../utils/search";
@@ -9,7 +9,7 @@ import { Provider } from "../models/provider";
 import { CATEGORIES } from "../utils/category";
 import { AdStatus } from "../types/ad-status";
 import { UnprocessableEntityHttpError } from "../errors/unprocessable-entity-http-error";
-import { db } from "../utils/db";
+import { s3Service } from "./s3-service";
 
 class AdService {
   async search(values: z.infer<typeof searchAdsSchema>) {
@@ -91,7 +91,11 @@ class AdService {
     return ad;
   }
 
-  async create(userId: number, input: z.infer<typeof adSchema>) {
+  async create(
+    userId: number,
+    input: z.infer<typeof adSchema>,
+    transaction: Transaction
+  ) {
     const provider = await Provider.findOne({ where: { userId } });
     if (!provider) {
       throw new NotFoundHttpError("Prestador de serviço não encontrado");
@@ -102,17 +106,47 @@ class AdService {
       throw new NotFoundHttpError("Categoria não encontrado");
     }
 
-    const ad = await Ad.create({
+    const ad = Ad.build({
       ...input,
       providerId: provider.id,
       status: AdStatus.ACTIVATED,
     });
 
-    await ad.reload({ include: [{ model: Provider, as: "provider" }] });
+    await this.uploadImage(ad, input.image);
+    await ad.save({ transaction });
+
+    await ad.reload({
+      include: [{ model: Provider, as: "provider" }],
+      transaction,
+    });
     return ad;
   }
 
-  async update(userId: number, adId: number, input: z.infer<typeof adSchema>) {
+  private async uploadImage(ad: Ad, image?: Express.Multer.File) {
+    if (!image) {
+      return;
+    }
+
+    if (ad.imageKey) {
+      const exists = await s3Service.exists(ad.imageKey);
+      if (exists) {
+        await s3Service.delete(ad.imageKey);
+      }
+    }
+
+    const key = `${crypto.randomUUID()}-${image.originalname}`;
+    const upload = await s3Service.upload(key, image.buffer, image.mimetype);
+
+    ad.imageKey = upload.key;
+    ad.imageUrl = upload.url;
+  }
+
+  async update(
+    userId: number,
+    adId: number,
+    input: z.infer<typeof adSchema>,
+    transaction: Transaction
+  ) {
     const provider = await Provider.findOne({ where: { userId } });
     if (!provider) {
       throw new NotFoundHttpError("Prestador de serviço não encontrado");
@@ -130,10 +164,14 @@ class AdService {
       throw new NotFoundHttpError("Categoria não encontrado");
     }
 
+    await this.uploadImage(ad, input.image);
     Object.assign(ad, input);
-    await ad.save();
+    await ad.save({ transaction });
 
-    await ad.reload({ include: [{ model: Provider, as: "provider" }] });
+    await ad.reload({
+      include: [{ model: Provider, as: "provider" }],
+      transaction,
+    });
     return ad;
   }
 

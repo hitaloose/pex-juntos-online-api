@@ -2,7 +2,9 @@ import { sign, verify } from "jsonwebtoken";
 import { CONFIG } from "../config";
 
 export const encode = (id: number) => {
-  return sign({ id }, CONFIG.JWT_SECRET, { expiresIn: CONFIG.JWT_EXPIRES_IN });
+  return sign({ id }, CONFIG.JWT_SECRET, {
+    expiresIn: `${CONFIG.JWT_EXPIRES_IN_HOURS}Hours`,
+  });
 };
 
 export const decode = (token: string) => {

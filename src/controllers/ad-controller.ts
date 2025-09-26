@@ -4,6 +4,7 @@ import { adService } from "../services/ad-service";
 import { positiveIntSchema } from "../schemas/common-schemas";
 import { HttpStatusCode } from "../types/http-status-code";
 import { Role } from "../types/role";
+import { db } from "../utils/db";
 
 class AdController {
   async search(request: Request, response: Response) {
@@ -27,12 +28,21 @@ class AdController {
   }
 
   async create(request: Request, response: Response) {
-    const body = adSchema.parse(request.body);
-    const userId = request.userId;
+    const transaction = await db.transaction();
 
-    const ad = await adService.create(userId, body);
+    try {
+      const body = adSchema.parse({ ...request.body, image: request.file });
+      const userId = request.userId;
 
-    response.status(HttpStatusCode.CREATED).json({ ad });
+      const ad = await adService.create(userId, body, transaction);
+
+      await transaction.commit();
+      response.status(HttpStatusCode.CREATED).json({ ad });
+    } catch (error) {
+      await transaction.rollback();
+
+      throw error;
+    }
   }
 
   async get(request: Request, response: Response) {
@@ -44,13 +54,22 @@ class AdController {
   }
 
   async update(request: Request, response: Response) {
-    const id = positiveIntSchema.parse(request.params.id);
-    const userId = request.userId;
-    const body = adSchema.parse(request.body);
+    const transaction = await db.transaction();
 
-    const ad = await adService.update(userId, id, body);
+    try {
+      const id = positiveIntSchema.parse(request.params.id);
+      const userId = request.userId;
+      const body = adSchema.parse({ ...request.body, image: request.file });
 
-    response.json({ ad });
+      const ad = await adService.update(userId, id, body, transaction);
+
+      await transaction.commit();
+      response.json({ ad });
+    } catch (error) {
+      await transaction.rollback();
+
+      throw error;
+    }
   }
 
   async delete(request: Request, response: Response) {

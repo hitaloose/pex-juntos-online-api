@@ -20,6 +20,8 @@ export class Ad extends Model<
   declare description: string;
   declare category: string;
   declare status: AdStatus;
+  declare imageKey?: string;
+  declare imageUrl?: string;
 
   declare provider?: NonAttribute<Provider>;
 
@@ -46,6 +48,14 @@ Ad.init(
     },
     title: {
       type: DataTypes.STRING,
+    },
+    imageKey: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      defaultValue: "",
     },
     description: {
       type: DataTypes.STRING,

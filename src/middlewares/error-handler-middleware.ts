@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpError } from "../errors/http-error";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 
 export const errorHandlerMiddleware = (
   error: unknown,
@@ -12,8 +12,8 @@ export const errorHandlerMiddleware = (
 
   if (error instanceof ZodError) {
     response.status(400).json({
-      message: "Erro no esquema de dados de entrada",
-      details: error.issues,
+      message: z.prettifyError(error),
+      details: z.treeifyError(error),
     });
   }
 

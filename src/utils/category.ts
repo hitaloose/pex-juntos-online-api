@@ -7,5 +7,6 @@ export const CATEGORIES: { label: string; value: string }[] = [
   { value: "eletricista", label: "Eletricista" },
   { value: "cuidador", label: "Cuidador" },
   { value: "aulas", label: "Aulas" },
+  { value: "beleza", label: "Beleza" },
   { value: "outros", label: "Outros" },
 ];

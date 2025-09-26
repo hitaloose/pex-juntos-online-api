@@ -16,6 +16,8 @@ export class Provider extends Model<
   declare name: string;
   declare phoneWhatsapp: string;
   declare neighborhood: string;
+  declare imageKey?: string;
+  declare imageUrl?: string;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -44,6 +46,14 @@ Provider.init(
     },
     neighborhood: {
       type: DataTypes.STRING,
+    },
+    imageKey: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      defaultValue: "",
     },
     createdAt: {
       type: DataTypes.DATE,
