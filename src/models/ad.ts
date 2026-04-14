@@ -5,10 +5,10 @@ import {
   InferCreationAttributes,
   Model,
   NonAttribute,
-} from "sequelize";
-import { db } from "../utils/db";
-import { Provider } from "./provider";
-import { AdStatus } from "../types/ad-status";
+} from 'sequelize';
+import { db } from '../utils/db';
+import { Provider } from './provider';
+import { AdStatus } from '../types/ad-status';
 
 export class Ad extends Model<
   InferAttributes<Ad>,
@@ -30,8 +30,8 @@ export class Ad extends Model<
 
   static associate() {
     Ad.belongsTo(Provider, {
-      foreignKey: "providerId",
-      as: "provider",
+      foreignKey: 'providerId',
+      as: 'provider',
     });
   }
 }
@@ -51,11 +51,11 @@ Ad.init(
     },
     imageKey: {
       type: DataTypes.STRING,
-      defaultValue: "",
+      defaultValue: '',
     },
     imageUrl: {
       type: DataTypes.STRING,
-      defaultValue: "",
+      defaultValue: '',
     },
     description: {
       type: DataTypes.STRING,
@@ -75,6 +75,6 @@ Ad.init(
   },
   {
     sequelize: db,
-    tableName: "ad",
+    tableName: 'ad',
   }
 );

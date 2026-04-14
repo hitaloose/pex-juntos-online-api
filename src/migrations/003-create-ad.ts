@@ -1,11 +1,11 @@
-import { QueryInterface, DataTypes, Sequelize } from "sequelize";
+import { QueryInterface, DataTypes, Sequelize } from 'sequelize';
 
 type Ctx = Sequelize;
 
 export async function up({ context }: { context: Ctx }) {
   const qi: QueryInterface = context.getQueryInterface();
 
-  await qi.createTable("ad", {
+  await qi.createTable('ad', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     providerId: { type: DataTypes.INTEGER },
     title: { type: DataTypes.STRING },
@@ -27,5 +27,5 @@ export async function up({ context }: { context: Ctx }) {
 
 export async function down({ context }: { context: Ctx }) {
   const qi: QueryInterface = context.getQueryInterface();
-  await qi.dropTable("ad");
+  await qi.dropTable('ad');
 }

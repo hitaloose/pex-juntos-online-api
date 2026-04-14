@@ -4,14 +4,15 @@ import {
   GetObjectCommand,
   HeadObjectCommand,
   DeleteObjectCommand,
-} from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { CONFIG } from "../config";
+} from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { CONFIG } from '../config';
+import { Buffer } from 'node:buffer';
 
 class S3Service {
   constructor() {
     this.client = new S3Client({
-      region: "auto",
+      region: 'auto',
       endpoint: CONFIG.R2_ENDPOINT,
       forcePathStyle: true,
       credentials: {
@@ -23,7 +24,12 @@ class S3Service {
 
   private client: S3Client;
 
-  async upload(key: string, body: any, contentType?: any, cacheControl?: any) {
+  async upload(
+    key: string,
+    body: Buffer,
+    contentType?: string,
+    cacheControl?: string
+  ) {
     const object = new PutObjectCommand({
       Bucket: CONFIG.R2_BUCKET,
       Key: key,
@@ -33,7 +39,7 @@ class S3Service {
     });
 
     await this.client.send(object);
-    console.log("s3Service.upload=true");
+    console.log('s3Service.upload=true');
 
     const url = this.getPublicUrl(key);
 
@@ -58,10 +64,10 @@ class S3Service {
 
       await this.client.send(object);
 
-      console.log("s3Service.exists=true");
+      console.log('s3Service.exists=true');
       return true;
-    } catch (err) {
-      console.log("s3Service.exists=false");
+    } catch {
+      console.log('s3Service.exists=false');
       return false;
     }
   }
@@ -72,7 +78,7 @@ class S3Service {
       Key: key,
     });
     await this.client.send(object);
-    console.log("s3Service.delete=true");
+    console.log('s3Service.delete=true');
   }
 }
 

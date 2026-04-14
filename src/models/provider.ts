@@ -4,8 +4,8 @@ import {
   InferAttributes,
   InferCreationAttributes,
   Model,
-} from "sequelize";
-import { db } from "../utils/db";
+} from 'sequelize';
+import { db } from '../utils/db';
 
 export class Provider extends Model<
   InferAttributes<Provider>,
@@ -49,11 +49,11 @@ Provider.init(
     },
     imageKey: {
       type: DataTypes.STRING,
-      defaultValue: "",
+      defaultValue: '',
     },
     imageUrl: {
       type: DataTypes.STRING,
-      defaultValue: "",
+      defaultValue: '',
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -64,6 +64,6 @@ Provider.init(
   },
   {
     sequelize: db,
-    tableName: "provider",
+    tableName: 'provider',
   }
 );

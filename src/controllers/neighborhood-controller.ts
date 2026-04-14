@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { providerService } from "../services/provider-service";
+import { Request, Response } from 'express';
+import { providerService } from '../services/provider-service';
 
 class NeighborhoodController {
   async getAll(request: Request, response: Response) {

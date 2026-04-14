@@ -1,15 +1,15 @@
-import { NextFunction, Request, Response } from "express";
-import { BadRequestHttpError } from "../errors/bad-request-http-error";
-import { UnauthorizedHttpError } from "../errors/unauthorized-http-error";
-import { decode } from "../utils/jwt";
-import { User } from "../models/user";
+import { NextFunction, Request, Response } from 'express';
+import { BadRequestHttpError } from '../errors/bad-request-http-error';
+import { UnauthorizedHttpError } from '../errors/unauthorized-http-error';
+import { decode } from '../utils/jwt';
+import { User } from '../models/user';
 
 const decodeToken = (token: string): number => {
   try {
     const userId = decode(token);
     return userId;
-  } catch (error) {
-    throw new UnauthorizedHttpError("Token inválido");
+  } catch {
+    throw new UnauthorizedHttpError('Token inválido');
   }
 };
 
@@ -21,18 +21,18 @@ export const authorizationMiddleware = async (
   const authorization = request.headers.authorization;
 
   if (!authorization) {
-    throw new BadRequestHttpError("Cabeçalho de autorização não fornecido");
+    throw new BadRequestHttpError('Cabeçalho de autorização não fornecido');
   }
 
-  const [prefix, token] = authorization.split(" ");
+  const [prefix, token] = authorization.split(' ');
 
   if (!prefix || !token) {
-    throw new UnauthorizedHttpError("Cabeçalho de autorização inválido");
+    throw new UnauthorizedHttpError('Cabeçalho de autorização inválido');
   }
 
-  if (prefix.toLowerCase() !== "bearer") {
+  if (prefix.toLowerCase() !== 'bearer') {
     throw new UnauthorizedHttpError(
-      "Prefixo do cabeçalho de autorização inválido"
+      'Prefixo do cabeçalho de autorização inválido'
     );
   }
 
@@ -41,7 +41,7 @@ export const authorizationMiddleware = async (
   const user = await User.findOne({ where: { id: userId } });
   if (!user) {
     throw new UnauthorizedHttpError(
-      "Usuário do cabeçalho de autorização inválido"
+      'Usuário do cabeçalho de autorização inválido'
     );
   }
 

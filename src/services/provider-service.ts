@@ -1,17 +1,17 @@
-import { Op, Transaction } from "sequelize";
-import { Provider } from "../models/provider";
-import { db } from "../utils/db";
-import z from "zod";
-import { providerSchema } from "../schemas/provider-schemas";
-import { NotFoundHttpError } from "../errors/not-found-http-error";
-import { s3Service } from "./s3-service";
+import { Op, Transaction } from 'sequelize';
+import { Provider } from '../models/provider';
+import { db } from '../utils/db';
+import z from 'zod';
+import { providerSchema } from '../schemas/provider-schemas';
+import { NotFoundHttpError } from '../errors/not-found-http-error';
+import { s3Service } from './s3-service';
 
 class ProviderService {
   async getNeighborhoods() {
     const providers = await Provider.findAll({
-      where: { neighborhood: { [Op.not]: "" } },
-      attributes: [[db.fn("DISTINCT", db.col("neighborhood")), "neighborhood"]],
-      order: [["neighborhood", "DESC"]],
+      where: { neighborhood: { [Op.not]: '' } },
+      attributes: [[db.fn('DISTINCT', db.col('neighborhood')), 'neighborhood']],
+      order: [['neighborhood', 'DESC']],
     });
 
     return providers.map((provider) => provider.neighborhood);
@@ -24,7 +24,7 @@ class ProviderService {
   ) {
     const provider = await Provider.findOne({ where: { userId } });
     if (!provider) {
-      throw new NotFoundHttpError("Provedor de serviço não encontrado");
+      throw new NotFoundHttpError('Provedor de serviço não encontrado');
     }
 
     await this.uploadImage(provider, input.image);

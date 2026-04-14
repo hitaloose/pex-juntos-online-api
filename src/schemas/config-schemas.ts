@@ -1,5 +1,5 @@
-import z from "zod";
-import { DbDialect } from "../types/db-dialect";
+import z from 'zod';
+import { DbDialect } from '../types/db-dialect';
 
 export const configSchema = z.object({
   DEFAULT_ADMIN_EMAIL: z.email().optional(),
@@ -8,7 +8,7 @@ export const configSchema = z.object({
   PORT: z.coerce.number(),
 
   DB_DIALECT: z.enum(DbDialect),
-  DB_STORAGE: z.string().default(""),
+  DB_STORAGE: z.string().default(''),
   DB_NAME: z.string(),
   DB_USERNAME: z.string(),
   DB_PASSWORD: z.string(),

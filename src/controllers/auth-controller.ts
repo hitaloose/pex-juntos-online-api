@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { loginSchema, signupSchema } from "../schemas/auth-schemas";
-import { authService } from "../services/auth-service";
-import { db } from "../utils/db";
+import { Request, Response } from 'express';
+import { loginSchema, signupSchema } from '../schemas/auth-schemas';
+import { authService } from '../services/auth-service';
+import { db } from '../utils/db';
 
 class AuthController {
   async signup(request: Request, response: Response) {

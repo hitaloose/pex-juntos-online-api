@@ -1,4 +1,4 @@
 export enum DbDialect {
-  SQLITE = "sqlite",
-  POSTGRES = "postgres",
+  SQLITE = 'sqlite',
+  POSTGRES = 'postgres',
 }

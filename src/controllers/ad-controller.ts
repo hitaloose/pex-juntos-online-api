@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
-import { adSchema, searchAdsSchema } from "../schemas/ad-schemas";
-import { adService } from "../services/ad-service";
-import { positiveIntSchema } from "../schemas/common-schemas";
-import { HttpStatusCode } from "../types/http-status-code";
-import { Role } from "../types/role";
-import { db } from "../utils/db";
+import { Request, Response } from 'express';
+import { adSchema, searchAdsSchema } from '../schemas/ad-schemas';
+import { adService } from '../services/ad-service';
+import { positiveIntSchema } from '../schemas/common-schemas';
+import { HttpStatusCode } from '../types/http-status-code';
+import { Role } from '../types/role';
+import { db } from '../utils/db';
 
 class AdController {
   async search(request: Request, response: Response) {

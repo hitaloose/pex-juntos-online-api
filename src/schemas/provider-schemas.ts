@@ -1,5 +1,5 @@
-import z from "zod";
-import { imageFileSchema } from "./common-schemas";
+import z from 'zod';
+import { imageFileSchema } from './common-schemas';
 
 export const providerSchema = z.object({
   name: z.string(),

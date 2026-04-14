@@ -1,7 +1,7 @@
-import { api } from "./api";
-import { CONFIG } from "./config";
-import { setupDb } from "./utils/db";
-import { models } from "./utils/models";
+import { api } from './api';
+import { CONFIG } from './config';
+import { setupDb } from './utils/db';
+import { models } from './utils/models';
 
 setupDb(models);
 

@@ -1,5 +1,5 @@
-import { Sequelize } from "sequelize";
-import { CONFIG } from "../config";
+import { Sequelize, Model, ModelStatic } from 'sequelize';
+import { CONFIG } from '../config';
 
 export const db = new Sequelize({
   dialect: CONFIG.DB_DIALECT,
@@ -14,14 +14,14 @@ export const db = new Sequelize({
 export async function assertDatabaseConnectionOk() {
   try {
     await db.authenticate();
-    console.log("✅ Conexão com o banco OK");
+    console.log('✅ Conexão com o banco OK');
   } catch (error) {
-    console.error("❌ Erro ao conectar no banco:", error);
+    console.error('❌ Erro ao conectar no banco:', error);
     process.exit(1);
   }
 }
 
-export const setupDb = (models: any[]) => {
+export const setupDb = (models: ModelStatic<Model>[]) => {
   models.forEach((model) => {
     model.associate();
   });

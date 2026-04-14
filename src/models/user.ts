@@ -5,10 +5,10 @@ import {
   InferCreationAttributes,
   Model,
   NonAttribute,
-} from "sequelize";
-import { db } from "../utils/db";
-import { Role } from "../types/role";
-import { Provider } from "./provider";
+} from 'sequelize';
+import { db } from '../utils/db';
+import { Role } from '../types/role';
+import { Provider } from './provider';
 
 export class User extends Model<
   InferAttributes<User>,
@@ -26,9 +26,9 @@ export class User extends Model<
 
   static associate() {
     User.hasOne(Provider, {
-      sourceKey: "id",
-      foreignKey: "userId",
-      as: "provider",
+      sourceKey: 'id',
+      foreignKey: 'userId',
+      as: 'provider',
     });
   }
 }
@@ -59,6 +59,6 @@ User.init(
   },
   {
     sequelize: db,
-    tableName: "user",
+    tableName: 'user',
   }
 );

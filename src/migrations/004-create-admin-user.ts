@@ -1,15 +1,15 @@
-import { Sequelize } from "sequelize";
-import { User } from "../models/user";
-import { Role } from "../types/role";
-import { hash } from "../utils/bcrypt";
-import { Provider } from "../models/provider";
-import { CONFIG } from "../config";
+import { Sequelize } from 'sequelize';
+import { User } from '../models/user';
+import { Role } from '../types/role';
+import { hash } from '../utils/bcrypt';
+import { Provider } from '../models/provider';
+import { CONFIG } from '../config';
 
 type Ctx = Sequelize;
 
-export async function up({ context }: { context: Ctx }) {
+export async function up({ context: _context }: { context: Ctx }) {
   if (!CONFIG.DEFAULT_ADMIN_PASSWORD || !CONFIG.DEFAULT_ADMIN_EMAIL) {
-    throw Error("Credenciais do administrador devem ser configuradas");
+    throw Error('Credenciais do administrador devem ser configuradas');
   }
 
   const hashedPassword = await hash(CONFIG.DEFAULT_ADMIN_PASSWORD);
@@ -19,16 +19,16 @@ export async function up({ context }: { context: Ctx }) {
     hashedPassword,
   });
   await Provider.create({
-    name: "ADMIN",
-    neighborhood: "",
-    phoneWhatsapp: "",
+    name: 'ADMIN',
+    neighborhood: '',
+    phoneWhatsapp: '',
     userId: admin.id,
   });
 }
 
-export async function down({ context }: { context: Ctx }) {
+export async function down({ context: _context }: { context: Ctx }) {
   if (!CONFIG.DEFAULT_ADMIN_PASSWORD || !CONFIG.DEFAULT_ADMIN_EMAIL) {
-    throw Error("Credenciais do administrador devem ser configuradas");
+    throw Error('Credenciais do administrador devem ser configuradas');
   }
 
   const admin = await User.findOne({

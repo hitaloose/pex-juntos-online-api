@@ -1,12 +1,12 @@
-import { NextFunction, Request, Response } from "express";
-import { HttpError } from "../errors/http-error";
-import z, { ZodError } from "zod";
+import { NextFunction, Request, Response } from 'express';
+import { HttpError } from '../errors/http-error';
+import z, { ZodError } from 'zod';
 
 export const errorHandlerMiddleware = (
   error: unknown,
   request: Request,
   response: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   console.log(error);
 
@@ -27,5 +27,5 @@ export const errorHandlerMiddleware = (
     return;
   }
 
-  response.status(500).json({ message: "Erro desconhecido" });
+  response.status(500).json({ message: 'Erro desconhecido' });
 };

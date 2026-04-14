@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { db } from "../utils/db";
-import { providerSchema } from "../schemas/provider-schemas";
-import { providerService } from "../services/provider-service";
+import { Request, Response } from 'express';
+import { db } from '../utils/db';
+import { providerSchema } from '../schemas/provider-schemas';
+import { providerService } from '../services/provider-service';
 
 class ProviderController {
   async update(request: Request, response: Response) {

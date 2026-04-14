@@ -1,6 +1,6 @@
 export enum AdStatus {
-  ACTIVATED = "activated",
-  DISABLED = "disabled",
-  HIDDEN = "hidden",
-  REMOVED = "removed",
+  ACTIVATED = 'activated',
+  DISABLED = 'disabled',
+  HIDDEN = 'hidden',
+  REMOVED = 'removed',
 }
