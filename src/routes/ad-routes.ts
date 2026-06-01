@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import { adController } from '../controllers/ad-controller';
-import { authorizationMiddleware } from '../middlewares/authorization-middleware';
-import { onlyAdminMiddleware } from '../middlewares/only-admin-middleware';
-import { uploadMiddleware } from '../middlewares/upload-middleware';
+import { adController } from '../controllers/ad-controller.js';
+import { authorizationMiddleware } from '../middlewares/authorization-middleware.js';
+import { onlyAdminMiddleware } from '../middlewares/only-admin-middleware.js';
+import { uploadMiddleware } from '../middlewares/upload-middleware.js';
+import { cacheMiddleware } from '../middlewares/memory-cache-middleware.js';
 
 export const adRoutes = Router();
 
-adRoutes.get('/search', adController.search);
-adRoutes.get('/:id', adController.get);
+adRoutes.get('/search', cacheMiddleware, adController.search);
+adRoutes.get('/:id', cacheMiddleware, adController.get);
 
 adRoutes.use(authorizationMiddleware);
 adRoutes.get('/', adController.getAll);

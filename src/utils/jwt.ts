@@ -1,5 +1,6 @@
-import { sign, verify } from 'jsonwebtoken';
-import { CONFIG } from '../config';
+import jwt from 'jsonwebtoken';
+const { sign, verify } = jwt;
+import { CONFIG } from '../config.js';
 
 export const encode = (id: number) => {
   return sign({ id }, CONFIG.JWT_SECRET, {

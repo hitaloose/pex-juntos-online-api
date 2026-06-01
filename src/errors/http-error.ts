@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '../types/http-status-code';
+import { HttpStatusCode } from '../types/http-status-code.js';
 
 export class HttpError extends Error {
   constructor(

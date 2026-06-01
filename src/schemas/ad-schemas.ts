@@ -1,5 +1,5 @@
 import z from 'zod';
-import { imageFileSchema } from './common-schemas';
+import { imageFileSchema } from './common-schemas.js';
 
 export const searchAdsSchema = z.object({
   q: z.string().optional().default(''),

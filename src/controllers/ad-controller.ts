@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import { adSchema, searchAdsSchema } from '../schemas/ad-schemas';
-import { adService } from '../services/ad-service';
-import { positiveIntSchema } from '../schemas/common-schemas';
-import { HttpStatusCode } from '../types/http-status-code';
-import { Role } from '../types/role';
-import { db } from '../utils/db';
+import { adSchema, searchAdsSchema } from '../schemas/ad-schemas.js';
+import { adService } from '../services/ad-service.js';
+import { positiveIntSchema } from '../schemas/common-schemas.js';
+import { HttpStatusCode } from '../types/http-status-code.js';
+import { Role } from '../types/role.js';
+import { db } from '../utils/db.js';
+import { invalidateAdCache } from '../utils/cache.js';
 
 class AdController {
   async search(request: Request, response: Response) {
@@ -37,6 +38,7 @@ class AdController {
       const ad = await adService.create(userId, body, transaction);
 
       await transaction.commit();
+      invalidateAdCache();
       response.status(HttpStatusCode.CREATED).json({ ad });
     } catch (error) {
       await transaction.rollback();
@@ -64,6 +66,7 @@ class AdController {
       const ad = await adService.update(userId, id, body, transaction);
 
       await transaction.commit();
+      invalidateAdCache();
       response.json({ ad });
     } catch (error) {
       await transaction.rollback();
@@ -77,6 +80,7 @@ class AdController {
     const userId = request.userId;
 
     await adService.delete(userId, id);
+    invalidateAdCache();
 
     response.send();
   }
@@ -86,6 +90,7 @@ class AdController {
     const userId = request.userId;
 
     const ad = await adService.toggleStatus(userId, id);
+    invalidateAdCache();
 
     response.json({ ad });
   }
@@ -94,6 +99,7 @@ class AdController {
     const id = positiveIntSchema.parse(request.params.id);
 
     const ad = await adService.toggleHide(id);
+    invalidateAdCache();
 
     response.json({ ad });
   }

@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { loginSchema, signupSchema } from '../schemas/auth-schemas';
-import { UnprocessableEntityHttpError } from '../errors/unprocessable-entity-http-error';
-import { User } from '../models/user';
-import { compare, hash } from '../utils/bcrypt';
-import { encode } from '../utils/jwt';
-import { Role } from '../types/role';
-import { Provider } from '../models/provider';
+import { loginSchema, signupSchema } from '../schemas/auth-schemas.js';
+import { UnprocessableEntityHttpError } from '../errors/unprocessable-entity-http-error.js';
+import { User } from '../models/user.js';
+import { compare, hash } from '../utils/bcrypt.js';
+import { encode } from '../utils/jwt.js';
+import { Role } from '../types/role.js';
+import { Provider } from '../models/provider.js';
 import { Transaction } from 'sequelize';
 
 class AuthService {

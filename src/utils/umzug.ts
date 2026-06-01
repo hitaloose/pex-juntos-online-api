@@ -1,6 +1,6 @@
 import { Umzug, SequelizeStorage } from 'umzug';
 import path from 'path';
-import { assertDatabaseConnectionOk, db } from './db';
+import { assertDatabaseConnectionOk, db } from './db.js';
 
 export const migrator = new Umzug({
   migrations: {

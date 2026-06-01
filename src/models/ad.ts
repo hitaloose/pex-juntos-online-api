@@ -6,9 +6,9 @@ import {
   Model,
   NonAttribute,
 } from 'sequelize';
-import { db } from '../utils/db';
-import { Provider } from './provider';
-import { AdStatus } from '../types/ad-status';
+import { db } from '../utils/db.js';
+import { Provider } from './provider.js';
+import { AdStatus } from '../types/ad-status.js';
 
 export class Ad extends Model<
   InferAttributes<Ad>,

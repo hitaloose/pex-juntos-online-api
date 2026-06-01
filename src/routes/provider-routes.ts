@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { authorizationMiddleware } from '../middlewares/authorization-middleware';
-import { uploadMiddleware } from '../middlewares/upload-middleware';
-import { providerController } from '../controllers/provider-controller';
+import { authorizationMiddleware } from '../middlewares/authorization-middleware.js';
+import { uploadMiddleware } from '../middlewares/upload-middleware.js';
+import { providerController } from '../controllers/provider-controller.js';
 
 export const providerRoutes = Router();
 

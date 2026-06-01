@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { neighborhoodController } from '../controllers/neighborhood-controller';
+import { neighborhoodController } from '../controllers/neighborhood-controller.js';
 
 export const neighborhoodRoute = Router();
 

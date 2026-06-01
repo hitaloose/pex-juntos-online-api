@@ -6,7 +6,7 @@ import {
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { CONFIG } from '../config';
+import { CONFIG } from '../config.js';
 import { Buffer } from 'node:buffer';
 
 class S3Service {

@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { BadRequestHttpError } from '../errors/bad-request-http-error';
-import { UnauthorizedHttpError } from '../errors/unauthorized-http-error';
-import { decode } from '../utils/jwt';
-import { User } from '../models/user';
+import { BadRequestHttpError } from '../errors/bad-request-http-error.js';
+import { UnauthorizedHttpError } from '../errors/unauthorized-http-error.js';
+import { decode } from '../utils/jwt.js';
+import { User } from '../models/user.js';
 
 const decodeToken = (token: string): number => {
   try {

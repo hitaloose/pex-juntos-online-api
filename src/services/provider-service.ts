@@ -1,10 +1,10 @@
 import { Op, Transaction } from 'sequelize';
-import { Provider } from '../models/provider';
-import { db } from '../utils/db';
+import { Provider } from '../models/provider.js';
+import { db } from '../utils/db.js';
 import z from 'zod';
-import { providerSchema } from '../schemas/provider-schemas';
-import { NotFoundHttpError } from '../errors/not-found-http-error';
-import { s3Service } from './s3-service';
+import { providerSchema } from '../schemas/provider-schemas.js';
+import { NotFoundHttpError } from '../errors/not-found-http-error.js';
+import { s3Service } from './s3-service.js';
 
 class ProviderService {
   async getNeighborhoods() {

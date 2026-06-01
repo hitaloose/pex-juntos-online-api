@@ -1,5 +1,5 @@
 import { Sequelize, Model, ModelStatic } from 'sequelize';
-import { CONFIG } from '../config';
+import { CONFIG } from '../config.js';
 
 export const db = new Sequelize({
   dialect: CONFIG.DB_DIALECT,
@@ -23,6 +23,6 @@ export async function assertDatabaseConnectionOk() {
 
 export const setupDb = (models: ModelStatic<Model>[]) => {
   models.forEach((model) => {
-    model.associate();
+    (model as ModelStatic<Model> & { associate?: () => void }).associate?.();
   });
 };

@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
-import { User } from '../models/user';
-import { Role } from '../types/role';
-import { hash } from '../utils/bcrypt';
-import { Provider } from '../models/provider';
-import { CONFIG } from '../config';
+import { User } from '../models/user.js';
+import { Role } from '../types/role.js';
+import { hash } from '../utils/bcrypt.js';
+import { Provider } from '../models/provider.js';
+import { CONFIG } from '../config.js';
 
 type Ctx = Sequelize;
 

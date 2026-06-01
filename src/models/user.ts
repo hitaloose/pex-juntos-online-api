@@ -6,9 +6,9 @@ import {
   Model,
   NonAttribute,
 } from 'sequelize';
-import { db } from '../utils/db';
-import { Role } from '../types/role';
-import { Provider } from './provider';
+import { db } from '../utils/db.js';
+import { Role } from '../types/role.js';
+import { Provider } from './provider.js';
 
 export class User extends Model<
   InferAttributes<User>,

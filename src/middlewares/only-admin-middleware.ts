@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { Role } from '../types/role';
-import { ForbiddenHttpError } from '../errors/forbidden-http-error';
+import { Role } from '../types/role.js';
+import { ForbiddenHttpError } from '../errors/forbidden-http-error.js';
 
 export const onlyAdminMiddleware = async (
   request: Request,

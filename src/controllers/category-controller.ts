@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CATEGORIES } from '../utils/category';
+import { CATEGORIES } from '../utils/category.js';
 
 class CategoryController {
   async getAll(request: Request, response: Response) {

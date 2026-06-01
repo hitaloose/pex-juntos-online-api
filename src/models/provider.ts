@@ -5,7 +5,7 @@ import {
   InferCreationAttributes,
   Model,
 } from 'sequelize';
-import { db } from '../utils/db';
+import { db } from '../utils/db.js';
 
 export class Provider extends Model<
   InferAttributes<Provider>,

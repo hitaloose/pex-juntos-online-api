@@ -1,5 +1,5 @@
 import z from 'zod';
-import { DbDialect } from '../types/db-dialect';
+import { DbDialect } from '../types/db-dialect.js';
 
 export const configSchema = z.object({
   DEFAULT_ADMIN_EMAIL: z.email().optional(),

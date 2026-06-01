@@ -1,15 +1,15 @@
 import { Op, Transaction, WhereOptions } from 'sequelize';
 
-import { Ad } from '../models/ad';
-import { escapeLike } from '../utils/search';
-import { NotFoundHttpError } from '../errors/not-found-http-error';
-import { adSchema, searchAdsSchema } from '../schemas/ad-schemas';
+import { Ad } from '../models/ad.js';
+import { escapeLike } from '../utils/search.js';
+import { NotFoundHttpError } from '../errors/not-found-http-error.js';
+import { adSchema, searchAdsSchema } from '../schemas/ad-schemas.js';
 import z from 'zod';
-import { Provider } from '../models/provider';
-import { CATEGORIES } from '../utils/category';
-import { AdStatus } from '../types/ad-status';
-import { UnprocessableEntityHttpError } from '../errors/unprocessable-entity-http-error';
-import { s3Service } from './s3-service';
+import { Provider } from '../models/provider.js';
+import { CATEGORIES } from '../utils/category.js';
+import { AdStatus } from '../types/ad-status.js';
+import { UnprocessableEntityHttpError } from '../errors/unprocessable-entity-http-error.js';
+import { s3Service } from './s3-service.js';
 
 class AdService {
   async search(values: z.infer<typeof searchAdsSchema>) {
@@ -33,10 +33,12 @@ class AdService {
     if (values.q && values.q.trim()) {
       const raw = values.q.trim();
       const needle = `%${escapeLike(raw).replace(/\s+/g, '%')}%`;
-      where[Op.or] = [
-        { title: { [Op.like]: needle } },
-        { description: { [Op.like]: needle } },
-      ];
+      Object.assign(where, {
+        [Op.or]: [
+          { title: { [Op.like]: needle } },
+          { description: { [Op.like]: needle } },
+        ],
+      });
     }
 
     const ads = await Ad.findAll({
