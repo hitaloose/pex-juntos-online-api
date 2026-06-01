@@ -12,25 +12,30 @@ export async function up({ context: _context }: { context: Ctx }) {
     throw Error('Credenciais do administrador devem ser configuradas');
   }
 
-  const hashedPassword = await hash(CONFIG.DEFAULT_ADMIN_PASSWORD);
-  const admin = await User.create({
-    email: CONFIG.DEFAULT_ADMIN_EMAIL,
-    role: Role.ADMIN,
-    hashedPassword,
-  });
+  const existing = await User.findOne({ where: { email: CONFIG.DEFAULT_ADMIN_EMAIL } });
+  if (existing) return;
 
-  // Raw insert: provider table does not have imageKey/imageUrl yet (added in 006)
-  const qi = _context.getQueryInterface();
-  await qi.bulkInsert('provider', [
-    {
-      userId: admin.id,
-      name: 'ADMIN',
-      neighborhood: '',
-      phoneWhatsapp: '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ]);
+  const transaction = await _context.transaction();
+  try {
+    const hashedPassword = await hash(CONFIG.DEFAULT_ADMIN_PASSWORD);
+    const admin = await User.create(
+      { email: CONFIG.DEFAULT_ADMIN_EMAIL, role: Role.ADMIN, hashedPassword },
+      { transaction }
+    );
+
+    // Raw insert: provider table does not have imageKey/imageUrl yet (added in 006)
+    const qi = _context.getQueryInterface();
+    await qi.bulkInsert(
+      'provider',
+      [{ userId: admin.id, name: 'ADMIN', neighborhood: '', phoneWhatsapp: '', createdAt: new Date(), updatedAt: new Date() }],
+      { transaction }
+    );
+
+    await transaction.commit();
+  } catch (err) {
+    await transaction.rollback();
+    throw err;
+  }
 }
 
 export async function down({ context: _context }: { context: Ctx }) {
