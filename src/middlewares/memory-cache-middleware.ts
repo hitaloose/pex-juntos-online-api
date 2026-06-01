@@ -16,7 +16,7 @@ export const cacheMiddleware = (
 
   const originalJson = res.json.bind(res);
   res.json = (data: unknown) => {
-    cache.set(key, data);
+    cache.set(key, JSON.parse(JSON.stringify(data)));
     return originalJson(data);
   };
 
