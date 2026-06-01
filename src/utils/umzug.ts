@@ -6,10 +6,13 @@ import { assertDatabaseConnectionOk, db } from './db.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// tsx runs .ts files directly; tsc compiles to .js — avoid matching .d.ts
+const migrationsGlob = __filename.endsWith('.ts') ? '*.ts' : '*.js';
+
 export const migrator = new Umzug({
   migrations: {
     glob: [
-      path.join(__dirname, '..', 'migrations', '*.{ts,js}'),
+      path.join(__dirname, '..', 'migrations', migrationsGlob),
       { cwd: __dirname },
     ],
     resolve: ({ name, path: p, context }) => ({
