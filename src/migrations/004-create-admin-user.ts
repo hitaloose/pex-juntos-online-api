@@ -18,12 +18,19 @@ export async function up({ context: _context }: { context: Ctx }) {
     role: Role.ADMIN,
     hashedPassword,
   });
-  await Provider.create({
-    name: 'ADMIN',
-    neighborhood: '',
-    phoneWhatsapp: '',
-    userId: admin.id,
-  });
+
+  // Raw insert: provider table does not have imageKey/imageUrl yet (added in 006)
+  const qi = _context.getQueryInterface();
+  await qi.bulkInsert('provider', [
+    {
+      userId: admin.id,
+      name: 'ADMIN',
+      neighborhood: '',
+      phoneWhatsapp: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ]);
 }
 
 export async function down({ context: _context }: { context: Ctx }) {
