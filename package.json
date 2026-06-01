@@ -20,6 +20,9 @@
   "author": "Hitalo Loose (hitaloose@gmail.com)",
   "license": "MIT",
   "description": "",
+  "engines": {
+    "node": "20.x"
+  },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
